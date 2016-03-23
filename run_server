@@ -1,0 +1,31 @@
+#!/bin/zsh
+
+# echo "$0"
+source ~/.zshrc 2> /dev/null 
+
+disable() {
+    svc_es_disable && svc_kb_disable
+}
+enable() {
+    svc_es_enable && svc_kb_enable
+}
+start() {
+    svc_es_start && svc_kb_start
+}
+stop() {
+    svc_es_stop && svc_kb_stop
+}
+status() {
+    svc_es_status && svc_kb_status
+}
+
+[[ "$1" = "disable" ]] && disable
+[[ "$1" = "enable" ]] && enable
+[[ "$1" = "start" ]] && start
+[[ "$1" = "start" ]] && stop
+[[ "$1" = "status" ]] && status
+
+
+[[ "$1" = "init" ]] && stop && disable && enable && start
+[[ "$1" = "reinit" ]] && enable && start
+[[ "$1" = "deinit" ]] && stop && disable

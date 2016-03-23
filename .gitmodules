@@ -1,3 +1,6 @@
 [submodule "kibana"]
 	path = kibana
 	url = git@github.com:elastic/kibana.git
+[submodule "cpulimit"]
+	path = cpulimit
+	url = ub2:/home/ub2/GIT_REPOS/cpulimit

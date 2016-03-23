@@ -11,3 +11,5 @@ elasticsearch/*
 !elasticsearch/RUN
 
 elasticsearch/RUN/bin
+elasticsearch/RUN/elasticsearch.pid
+
