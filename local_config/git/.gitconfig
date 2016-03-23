@@ -50,5 +50,3 @@
     changed = yellow bold
     untracked = red bold
 
-[submodule "kibana"]
-	url = git@github.com:elastic/kibana.git
