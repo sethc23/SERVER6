@@ -1,0 +1,15 @@
+[Unit]
+Description=Elasticsearch
+After=syslog.target network.target remote-fs.target nss-lookup.target
+
+[Service]
+User=ub2
+Group=ub2
+PIDFile=/home/ub2/SERVER2/run/elastic_search.pid
+WorkingDirectory=/home/ub2/SERVER2/elasticsearch/RUN
+#ExecStart=/home/ub2/SERVER2/elasticsearch/RUN/run_elastic
+ExecStart=/home/ub2/SERVER2/elasticsearch/bin/elasticsearch
+
+[Install]
+WantedBy=multi-user.target
+

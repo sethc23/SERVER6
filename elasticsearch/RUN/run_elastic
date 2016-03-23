@@ -1,0 +1,51 @@
+#!/bin/zsh
+
+# USER=ub2
+# source $HOME_ENV/.scripts/_base
+
+CMD="/home/ub2/SERVER2/elasticsearch/bin/elasticsearch"
+CMD_LOG="/var/log/syslogs/elasticsearch.log"
+LOG_PREFIX="ElasticSearch"
+PID_FILE="/home/ub2/SERVER2/run/elastic_search.pid"
+bash -c ": > $PID_FILE" > /dev/null 2>&1 &
+# MSG_PREFIX="supervisor "`date +'%Y-%m-%d %H:%M:%S%z'`" INFO"
+MSG_PREFIX="elasticsearch "`date +'%Y-%m-%d %H:%M:%S%z'`" INFO"
+
+echo "$CMD -p $PID_FILE"
+
+CPU_LIMIT=$(bash -l -c "cat  $HOME_ENV/.scripts/system_settings.py | \
+grep -i -E '^[[:space:]]*ELASTIC_SEARCH_CPU_LIMIT' | \
+sed -r 's/ELASTIC_SEARCH_CPU_LIMIT[[:space:]]*=[[:space:]]*([[:digit:]]*)/\1/g';")
+
+# trap 'sudo kill -TERM $ES_PID; sudo kill -TERM $REAL_PID; sudo kill -TERM $CPU_LIMIT_PID' TERM INT
+# sudo sh -l -c "$CMD -p $PID_FILE | stdbuf -i0 -o0 -e0 sed 's/^/$LOG_PREFIX /' >> $CMD_LOG 2>&1" &
+zsh -c "$CMD -p $PID_FILE | stdbuf -i0 -o0 -e0 sed 's/^/$LOG_PREFIX /' >> $CMD_LOG 2>&1" &
+ES_PID=$!
+# sudo cpulimit --pid="$(cat $PID_FILE)" --limit=$CPU_LIMIT &
+
+# ElasticSearch Runs a script that starts a service
+# The below is necessary to capture the real PID
+# ---
+# echo "25"
+
+# REAL_PID=""
+# while [[ -z "$REAL_PID" ]]; do 
+#     sleep 1
+#     REAL_PID="$(cat $PID_FILE)"
+#     # REAL_PID="$(pstree -up | grep java | head -n 1 | sed -r 's/.*(\-sh\()([0-9]+)(.*)/\2/g')"
+# done
+
+# sudo cpulimit --pid=$REAL_PID --limit=$CPU_LIMIT > /dev/null 2>&1 &
+# CPU_LIMIT_PID=$!
+# sh -c "echo \"$MSG_PREFIX success: elastic_search with cpu-limit=$CPU_LIMIT\" >> /var/log/syslogs/supervisor.log"
+
+
+# wait $ES_PID
+# trap - TERM INT
+# wait $ES_PID
+
+# sh -c "echo \"$MSG_PREFIX stopped: elastic_search with cpu-limit=$CPU_LIMIT (dies when syslog-ng dies)\" >> /var/log/syslogs/supervisor.log"
+# kill -9 $REAL_PID
+
+
+# EXIT_STATUS=$?

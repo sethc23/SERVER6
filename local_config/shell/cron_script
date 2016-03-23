@@ -1,0 +1,4 @@
+#!/bin/bash
+
+script -c "bash -i -l -c '$*'" | grep -Ev '^Script started,' | grep -Ev '^Script done,'
+rm -fR typescript

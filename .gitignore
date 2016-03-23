@@ -1,0 +1,13 @@
+
+*.*~
+*.pyc
+*.sqlite
+*.DS_Store
+*.log
+*.aws
+
+elasticsearch/*
+!elasticsearch/config
+!elasticsearch/RUN
+
+elasticsearch/RUN/bin

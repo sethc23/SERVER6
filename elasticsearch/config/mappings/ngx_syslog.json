@@ -1,0 +1,23 @@
+{
+  "ngx_syslog": {
+    "mappings": {
+      "message": {
+        "properties": {
+          "ISODATE": {"type": "date","format" : "date_time_no_millis"},
+          "HOSTFROM": {"type": "string"},
+          "SOURCEIP": {"type": "string"},
+          "HOST": {"type": "string"},
+          "SOURCE": {"type": "string"},
+          "SEQNUM": {"type": "integer"},
+          "LEVEL": {"type": "string"},
+          "TAG": {"type": "string"},
+          "PROGRAM": {"type": "string"},
+          "PID": {"type": "integer"},
+          "MSGID": {"type": "string"},
+          "MSG": {"type": "string"},
+          "SDATA": {"type": "string"}
+        }
+      }
+    }
+  }
+}

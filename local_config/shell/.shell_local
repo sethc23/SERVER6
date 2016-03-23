@@ -1,0 +1,9 @@
+
+
+if [[ "$CLIENT_HOST" = "SERVER3" ]]; then
+    ZSH_THEME="cobalt2"
+else
+    ZSH_THEME="candy"
+fi
+
+ZSH_THEME="cobalt2"

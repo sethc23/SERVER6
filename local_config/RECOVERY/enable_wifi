@@ -1,0 +1,16 @@
+sudo ip link set wlan0 up
+sudo dhclient -r wlan0
+
+NETNUM=`sudo wpa_cli add_network` || echo "failed" && return
+sudo wpa_cli set_network $NETNUM ssid "$1" || echo "failed" && return
+
+if [[ -n $2 ]]; then
+    sudo wpa_cli set_network $NETNUM psk "$2"  || echo "failed" && return
+else
+    sudo wpa_cli set_network $NETNUM key_mgmt NONE  || echo "failed" && return
+fi
+
+sudo wpa_cli enable_network $NETNUM || echo "failed" && return
+sudo wpa_cli save_config  || echo "failed saving"
+
+sudo dhclient -v wlan0
